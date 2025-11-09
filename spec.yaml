@@ -1,0 +1,11 @@
+steps:
+  - id: prepare-data
+    run: python scripts/prepare_data.py --input data/raw --out data/processed
+    verify: python scripts/verify_data.py data/processed
+
+  - id: train-model
+    run: python scripts/train_model.py --data data/processed --out model/
+    verify: python scripts/verify_model.py model/
+
+  - id: evaluate-model
+    run: python scripts/evaluate_model.py --model model/ --test data/test
